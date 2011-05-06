@@ -153,12 +153,12 @@ public class OrdersProcessor {
      * Process a set of orders sent by the server
      *
      * @param data        Packet packet containing orders
-     * @param next_packet Offset of end of this packet (start of next)
-     * @param n_orders    Number of orders sent in this packet
+     * @param nextPacket Offset of end of this packet (start of next)
+     * @param nOrders    Number of orders sent in this packet
      * @throws OrderException    Unable to process an order
      * @throws RdesktopException Unable to process the Orders
      */
-    public void processOrders(RdpPacket data, int next_packet, int n_orders)
+    public void processOrders(RdpPacket data, int nextPacket, int nOrders)
             throws OrderException, RdesktopException {
 
         int present;
@@ -167,7 +167,7 @@ public class OrdersProcessor {
         int size;
         boolean delta;
 
-        while (n_orders-- > 0) {
+        while (nOrders-- > 0) {
 
             orderFlags = data.get8();
 
@@ -308,7 +308,7 @@ public class OrdersProcessor {
                 }
             }
         }
-        if (data.getPosition() != next_packet) {
+        if (data.getPosition() != nextPacket) {
             throw new OrderException("End not reached!");
         }
     }
